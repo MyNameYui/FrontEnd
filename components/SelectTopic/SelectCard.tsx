@@ -5,8 +5,10 @@ import { useParams } from 'next/navigation';
 
 const SelectCard = () => {
   const [data, setData] = useState([]);
+  const [page, setPage] = React.useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const params = useParams()
-
+  
   useEffect(() => {
     Axios.get(`/lesson/category/${params.id}/topics?page=1&limit=30`, {
       headers: {
@@ -16,10 +18,28 @@ const SelectCard = () => {
       setData(res.data.detail.topics)
       console.log(res.data.detail.topics)
     }).catch((err) => {
-
+  
     })
   }, [])
-
+  
+  const loadMore = async () => {
+    setIsLoading(true);
+  
+    const nextPage = page + 1;
+  
+    const response = await Axios.get(`/lesson/category/${params.id}/topics?page=${nextPage}&limit=30`,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("auth.token")}`
+      }
+    });
+    const newTopics = response.data.detail.topics;
+  
+    setData([...data, ...newTopics]);
+    setPage(nextPage);
+  
+    setIsLoading(false);
+  };
+  
   return (
     <>
       {data.map((x, key) => {
@@ -42,8 +62,14 @@ const SelectCard = () => {
           </Link>
         );
       })}
+  
+      {data.length < 30 && (
+        <button onClick={loadMore} className="btn-grad">
+          {isLoading ? 'Loading...' : 'Load More'}
+        </button>
+      )}
     </>
-  )
+  );
 }
 
 export default SelectCard

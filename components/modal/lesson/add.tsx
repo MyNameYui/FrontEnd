@@ -304,7 +304,7 @@ export default function Add() {
                             variant="bordered"
                           />
                           <Input
-                            value={textareas[index].hint}
+                            value={questions[index].hint}
                             onValueChange={updateFieldChanged(index, "hint")}
                             isClearable
                             required

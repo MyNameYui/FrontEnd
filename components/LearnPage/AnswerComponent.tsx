@@ -1,11 +1,12 @@
 import { AiFillQuestionCircle } from "react-icons/ai";
 
-const AnswerComponent = () => {
+const AnswerComponent = ({question} : {
+  question: string,
+}) => {
   return (
     <>
       <div className="flex flex-col sm:justify-start md:justify-start lg:justify-start sm:flex-row sm:items-center p-4">
         <div className="flex items-center">
-          {" "}
           {/* เพิ่มคลาส 'items-center' ใน div นี้ */}
           <div className="text-5xl pr-4 sm:pl-4">
             <AiFillQuestionCircle style={{ color: "#E45E07" }} />
@@ -15,7 +16,7 @@ const AnswerComponent = () => {
       </div>
 
       <div className="text-4xl pt-6 sm:pt-0 flex flex-col sm:flex-row justify-center items-center px-4 sm:px-8">
-        Port 22 คืออะไร
+       {question}
       </div>
       <div className="pt-5 flex flex-col sm:flex-row justify-start sm:justify-start items-center px-4 sm:px-8 pb-8">
         <div className="mb-4 sm:mb-0 sm:mr-2">
