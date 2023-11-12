@@ -30,7 +30,7 @@ const Header = ({ data }: { data: any }) => {
                   {data.questions.map((x, key) => {
                     return (
                       <>
-                        <AnswerComponent question={x.question} />
+                        <AnswerComponent question={x} />
                       </>
                     );
                   })}

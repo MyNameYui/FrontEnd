@@ -20,6 +20,7 @@ import {
   Modal,
   Select,
   SelectItem,
+  Textarea,
 } from "@nextui-org/react";
 import useSWR from "swr";
 import Add from "../../modal/lesson/add";
@@ -178,7 +179,7 @@ export default function App() {
       text: "ลบสำเร็จ",
     });
   }
-
+  
   function editPackage() {
     const result = AddValidator.safeParse(textareas);
     if (result.success) {
@@ -243,16 +244,17 @@ export default function App() {
         }
       >
         <TableHeader>
-          <TableColumn key="categoryId">categoryId</TableColumn>
-          <TableColumn key="categoryName">categoryName</TableColumn>
+          <TableColumn key="id">id</TableColumn>
+          <TableColumn key="completed">completed</TableColumn>
+          <TableColumn key="heading">heading</TableColumn>
         </TableHeader>
         <TableBody
-          items={data?.detail ?? []}
+          items={data?.detail}
           loadingContent={<Spinner />}
           loadingState={loadingState}
         >
           {(item) => (
-            <TableRow key={item?.categoryId}>
+            <TableRow key={item?.id}>
               {(columnKey) => (
                 <TableCell>{getKeyValue(item, columnKey)}</TableCell>
               )}
@@ -436,6 +438,7 @@ export default function App() {
                   color="default"
                   variant="light"
                   onPress={() => {
+                    loadPackage();
                     editPackage();
                     onClose();
                   }}

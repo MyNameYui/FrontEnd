@@ -7,7 +7,7 @@ import RouterProtect from "@/app/router";
 const page = () => {
   return (
     <>
-      <RouterProtect>
+      <RouterProtect isAdmin={true}>
         <NavbarBackground>
           <Nav />
         </NavbarBackground>

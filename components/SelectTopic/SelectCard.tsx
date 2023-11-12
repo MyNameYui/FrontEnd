@@ -44,7 +44,7 @@ const SelectCard = () => {
     <>
       {data.map((x, key) => {
         return (
-          <Link href={x}>
+          <Link href={`/lesson/${x.topicId}/${}`}>
             <div key={key} className="pt-4">
               <div className="flex">
                 <div className="bg-[#E45E07] w-full h-14 rounded-l-xl flex items-center">

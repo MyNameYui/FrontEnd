@@ -1,8 +1,14 @@
+import { useState } from "react";
 import { AiFillQuestionCircle } from "react-icons/ai";
 
 const AnswerComponent = ({question} : {
-  question: string,
+  question: any,
 }) => {
+  const [t,setT] = useState();
+
+  function h(e){
+    setT(e.target.value)
+  }
   return (
     <>
       <div className="flex flex-col sm:justify-start md:justify-start lg:justify-start sm:flex-row sm:items-center p-4">
@@ -16,13 +22,14 @@ const AnswerComponent = ({question} : {
       </div>
 
       <div className="text-4xl pt-6 sm:pt-0 flex flex-col sm:flex-row justify-center items-center px-4 sm:px-8">
-       {question}
+       {question.question}
       </div>
       <div className="pt-5 flex flex-col sm:flex-row justify-start sm:justify-start items-center px-4 sm:px-8 pb-8">
         <div className="mb-4 sm:mb-0 sm:mr-2">
           <input
             type="text"
             name="answer"
+            onChange={h}
             className="rounded-lg w-full sm:w-96 h-12 sm:h-14 flex-shrink-0 bg-[#E45E07] rounded-8 text-gray-900 px-4 outline-none transition focus:ring-2 focus:ring-white"
           />
         </div>

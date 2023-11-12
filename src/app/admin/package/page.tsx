@@ -6,7 +6,7 @@ import NavbarBackground from "../../../../components/Navbar/NavbarBackground";
 export default function Page() {
   return (
     <>
-      <RouterProtect>
+      <RouterProtect isAdmin={true}>
         <NavbarBackground>
           <Nav />
         </NavbarBackground>
