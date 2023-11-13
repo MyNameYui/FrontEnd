@@ -4,12 +4,19 @@ import { FaBars } from "react-icons/fa";
 import Image from "next/image";
 import LogoImage from "../../src/assets/konhackweblogo.png";
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { isLogin } from "../../reducer/state";
 
 const Nav = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isauth, setIsAuth] = useRecoilState(isLogin);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const logout = () => {
+    setIsAuth({ isLogin: false, token: "" });
   };
 
   return (
@@ -34,23 +41,29 @@ const Nav = () => {
             </div>
           </div>
 
-
           <div className="md:ml-auto md:flex hidden">
             <div className="space-x-3 text-lg">
               <Link href="/learn">Learn</Link>
               <Link href="/lab">Lab</Link>
               <Link href="/blog">Blog</Link>
               <Link href="/pricing">Pricing</Link>
-              <button className="font-semibold text-sm w-24 h-9 flex-shrink-0 rounded-lg border-2 border-orange-500 bg-white text-orange-500 hover:bg-orange-500 hover:text-white duration-200">
-                Learn Now
-              </button>
+              {isauth.isLogin ? (
+                <>
+                  <button className="font-semibold text-sm w-24 h-9 flex-shrink-0 rounded-lg border-2 border-orange-500 bg-white text-orange-500 hover:bg-orange-500 hover:text-white duration-200">
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className="font-semibold text-sm w-24 h-9 flex-shrink-0 rounded-lg border-2 border-orange-500 bg-white text-orange-500 hover:bg-orange-500 hover:text-white duration-200">
+                    Learn Now
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
       </div>
-
-
-
 
       {/* Mobile Dropdown Menu */}
       {isMobileMenuOpen && (
@@ -61,28 +74,46 @@ const Nav = () => {
             </div>
             <div className="mb-4">
               <Link href="/learn">
-                <span className="block text-2xl font-semibold hover:text-orange-500">Learn</span>
+                <span className="block text-2xl font-semibold hover:text-orange-500">
+                  Learn
+                </span>
               </Link>
             </div>
             <div className="mb-4">
               <Link href="/lab">
-                <span className="block text-2xl font-semibold hover:text-orange-500">Lab</span>
+                <span className="block text-2xl font-semibold hover:text-orange-500">
+                  Lab
+                </span>
               </Link>
             </div>
             <div className="mb-4">
               <Link href="/blog">
-                <span className="block text-2xl font-semibold hover:text-orange-500">Blog</span>
+                <span className="block text-2xl font-semibold hover:text-orange-500">
+                  Blog
+                </span>
               </Link>
             </div>
             <div className="mb-4">
               <Link href="/pricing">
-                <span className="block text-2xl font-semibold hover:text-orange-500">Pricing</span>
+                <span className="block text-2xl font-semibold hover:text-orange-500">
+                  Pricing
+                </span>
               </Link>
             </div>
             <div>
-              <button className="font-semibold text-lg w-32 h-8 rounded-lg border-2 border-orange-500 bg-white text-orange-500 hover:bg-orange-500 hover:text-white duration-200">
-                Learn Now
-              </button>
+              {isauth.isLogin ? (
+                <>
+                  <button className="font-semibold text-sm w-24 h-9 flex-shrink-0 rounded-lg border-2 border-orange-500 bg-white text-orange-500 hover:bg-orange-500 hover:text-white duration-200">
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className="font-semibold text-sm w-24 h-9 flex-shrink-0 rounded-lg border-2 border-orange-500 bg-white text-orange-500 hover:bg-orange-500 hover:text-white duration-200">
+                    Learn Now
+                  </button>
+                </>
+              )}
             </div>
           </div>
           <button
@@ -93,8 +124,6 @@ const Nav = () => {
           </button>
         </div>
       )}
-
-
     </div>
   );
 };
